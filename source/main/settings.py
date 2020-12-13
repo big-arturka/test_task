@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'widget_tweaks',
     'accounts',
+    'rest_framework',
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
@@ -122,3 +124,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
+
+LOGIN_URL = 'accounts:login'
+
+
+BASE_HOST = 'http://localhost:8000'
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_URL = '/media/'
