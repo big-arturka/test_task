@@ -70,3 +70,13 @@
     text-align: center;
     border: solid 1px gray;
 }
+
+.category-block {
+    box-sizing: border-box;
+    padding: 5px 10px;
+    background: lightblue;
+    border: solid 1px lightgray;
+    border-radius: 5px;
+    color: white;
+    display: inline-block;
+}

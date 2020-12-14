@@ -4,20 +4,25 @@
     <a class="btn btn-outline-dark btn-block" href="{% url 'news_client:article_create' %}">Add new article...</a>
     {% for article in articles %}
         <div class="card mt-4 mb-4">
-            <div class="card-body">
-                <h5 class="card-title">Title: {{ article.title }}</h5>
-                <a class="author-link" href="{% url 'accounts:detail' article.user_id.pk %}">Author: {{ article.user_id }}</a>
-                <div class="photo-actions">
-                    <a class="btn btn-outline-dark" href="{% url 'news_client:article_view' article.pk %}">More details...</a>
-                    <a class="btn btn-outline-dark" href="{% url 'news_client:article_update' article.pk %}">Edit...</a>
-                    <a class="btn btn-outline-dark" href="{% url 'news_client:article_delete' article.pk %}">Delete...</a>
-                </div>
-            </div>
             {% if article.image %}
                 <img src="{{ article.image.url }}" class="card-img-top" width="300" alt="photo">
             {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">Title: {{ article.title }}</h5>
+                <a class="author-link" href="{% url 'accounts:detail' article.user_id.pk %}">Author: {{ article.user_id }}</a>
+                <div class="article-actions">
+                    {% if request.user.is_authenticated %}
+                        <a class="btn btn-outline-dark" href="{% url 'news_client:article_view' article.pk %}">More details...</a>
+                        <a class="btn btn-outline-dark" href="{% url 'news_client:article_update' article.pk %}">Edit...</a>
+                        <a class="btn btn-outline-dark" href="{% url 'news_client:article_delete' article.pk %}">Delete...</a>
+                    {% endif %}
+                </div>
+            </div>
             <div class="card-footer">
-                <small class="text-muted">{{ article.category_id.title }}</small>
+                {% if article.category_id.parent_id %}
+                    <div class="category-block">{{ article.category_id.parent_id.title }}</div>
+                {% endif %}
+                <div class="category-block">{{ article.category_id.title }}</div>
             </div>
         </div>
 {% endfor %}

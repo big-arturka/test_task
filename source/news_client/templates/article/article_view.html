@@ -1,11 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    {% if request.user.is_authenticated %}
+        <a class="btn btn-outline-dark btn-block" href="{% url 'news_client:article_create' %}">Add new article...</a>
+    {% endif %}
 
-    <div class="detail-view-container">
-    <h1>{{ article.title }}</h1>
-    <h1>{{ article.description }}</h1>
-    <h4>{{ article.category_id.title }}</h4>
+    <div class="card mt-4 mb-4">
+        {% if article.image %}
+            <img src="{{ article.image.url }}" class="card-img-top" width="300" alt="photo">
+        {% endif %}
+        <div class="card-body">
+            <h5 class="card-title">{{ article.title }}</h5>
+            <a class="author-link" href="{% url 'accounts:detail' article.user_id.pk %}">{{ article.user_id }}</a>
+            <div class="article-actions">
+                {% if request.user.is_authenticated %}
+                    <a class="btn btn-outline-dark" href="{% url 'news_client:article_view' article.pk %}">More details...</a>
+                    <a class="btn btn-outline-dark" href="{% url 'news_client:article_update' article.pk %}">Edit...</a>
+                    <a class="btn btn-outline-dark" href="{% url 'news_client:article_delete' article.pk %}">Delete...</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card-footer">
+            {% if article.category_id.parent_id %}
+                <div class="category-block">{{ article.category_id.parent_id.title }}</div>
+            {% endif %}
+
+            <div class="category-block">{{ article.category_id.title }}</div>
+        </div>
     </div>
-
 {% endblock %}

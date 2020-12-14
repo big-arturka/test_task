@@ -4,10 +4,25 @@
 
 {% block content %}
 
+    {% if request.user.is_authenticated %}
+        <a class="btn btn-outline-dark btn-block" href="{% url 'news_client:category_create' %}">Add new category...</a>
+    {% endif %}
     <div class="category-list-container">
         {% for category in categories %}
-            <h1>{{ category.title }}</h1>
-            <h3>Parent: {{ category.parent_id.title }}</h3>
+            <div class="card w-75">
+                <div class="card-body">
+                    <h5 class="card-title category-block">{{ category.title }}</h5>
+                    <h5 class="card-text">
+                        {% if category.parent_id %}
+                            <div class="category-block">{{ category.parent_id.title }}</div>
+                        {% endif %}
+                    </h5>
+                    {% if request.user.is_authenticated %}
+                        <a class="btn btn-outline-dark" href="{% url 'news_client:category_update' category.pk %}">Edit...</a>
+                        <a class="btn btn-outline-dark" href="{% url 'news_client:category_delete' category.pk %}">Delete...</a>
+                    {% endif %}
+                </div>
+            </div>
         {% endfor %}
     </div>
 
