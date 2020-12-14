@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Category{% endblock %}
+
+{% block content %}
+    <h1>Create Category</h1>
+
+    {% url "news_client:category_create" as action_url %}
+    {% include 'partial/form.html' with action_url=action_url form_method='post' %}
+{% endblock %}
