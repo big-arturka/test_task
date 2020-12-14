@@ -1,4 +1,5 @@
-from django.urls import reverse_lazy
+from django.shortcuts import redirect
+from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 
 from news_client.forms import ArticleForm
@@ -26,6 +27,12 @@ class ArticleCreateView(CreateView):
     form_class = ArticleForm
     model = Article
 
+    def form_valid(self, form):
+        article = form.save(commit=False)
+        article.author = self.request.user
+        article.save()
+        return redirect('news_client:article_view', pk=article.pk)
+
 
 class ArticleUpdateView(UpdateView):
     template_name = 'article/article_update.html'
@@ -33,8 +40,12 @@ class ArticleUpdateView(UpdateView):
     model = Article
     permission_required = 'webapp.change_article'
 
+    def form_valid(self, form):
+        article = form.save()
+        return redirect('news_client:article_view', pk=article.pk)
+
 
 class ArticleDeleteView(DeleteView):
     template_name = 'article/article_delete.html'
     model = Article
-    success_url = reverse_lazy('webapp:index')
+    success_url = reverse_lazy('news_client:index')

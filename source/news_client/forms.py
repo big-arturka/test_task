@@ -6,7 +6,7 @@ from news_client.models import Article, Category
 class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
-        fields = ['title', 'description', 'category_id', 'user_id', 'image']
+        fields = ['title', 'description', 'category_id', 'image']
 
 
 class CategoryForm(forms.ModelForm):

@@ -1,0 +1,72 @@
+.error {
+    font-weight: bold;
+    color: red;
+    margin-top: 2px;
+}
+
+.form-input {
+    width: 100%;
+    border-radius: 5px;
+    border: solid 1px lightgray;
+    background: lightblue;
+    color: black;
+    padding: 3px 5px;
+}
+
+.form-input:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.form-error {
+    border: solid 1px red;
+    background: darkred;
+}
+
+.form-error:focus {
+    box-shadow: 0 0 5px rgb(255, 0, 0);
+}
+
+.red {
+    color: red;
+    font-weight: bold;
+}
+
+.pagination {
+    text-align: center;
+    display: block;
+}
+
+.pagination a, .pagination .page-disabled, .mass-actions input {
+    display: inline-block;
+    border: solid 1px #6a7ddd;
+    border-radius: 3px;
+    padding: 5px;
+    margin: 3px;
+}
+
+.pagination a, .mass-actions input {
+    color: white;
+    text-decoration: none;
+}
+
+.pagination a:hover, .mass-actions input:hover {
+    text-decoration: underline;
+}
+
+.pagination .page-disabled {
+    color: #dddddd
+}
+
+.pagination .current-page {
+    display: inline-block;
+}
+
+.pagination .current-page input {
+    width: 50px;
+    padding: 5px 7px;
+    font-size: inherit;
+    border-radius: 5px;
+    text-align: center;
+    border: solid 1px gray;
+}

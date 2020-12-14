@@ -126,8 +126,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = 'index'
-LOGOUT_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'news_client:index'
+LOGOUT_REDIRECT_URL = 'news_client:index'
 
 LOGIN_URL = 'accounts:login'
 
