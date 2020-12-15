@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'accounts',
     'rest_framework',
-    'news_client'
+    'news_client',
+    'api'
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
