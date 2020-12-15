@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'rest_framework',
     'news_client',
-    'api'
+    'api_v1'
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'

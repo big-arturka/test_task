@@ -1,4 +1,3 @@
-from django.urls import path
 from django.urls import path, include
 
 from news_client.views import IndexView, ArticleView, ArticleCreateView, ArticleUpdateView, ArticleDeleteView, \
