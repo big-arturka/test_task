@@ -3,7 +3,7 @@
 {% block title %}Update Category{% endblock %}
 
 {% block content %}
-    <h1>Update Category</h1>
+    <h1 class="title">Update Category</h1>
 
     {% url "news_client:category_update" pk=article.pk as action_url %}
     {% include 'partial/form.html' with action_url=action_url form_method='post' button_text='Update' %}

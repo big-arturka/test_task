@@ -3,6 +3,7 @@
 {% block title %}Delete{% endblock %}
 
 {% block content %}
+    <h1 class="title">Delete Article</h1>
     <h1>Are you sure you want to delete the article "{{ article.title }}"?</h1>
     <p>By: {{ article.user_id }}</p>
     <form action="{% url "news_client:article_delete" article.pk %}" method="post">

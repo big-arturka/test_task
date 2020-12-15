@@ -1,16 +1,17 @@
 from django.contrib.auth import login, get_user_model, update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
-from django.urls import reverse
-from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView
+
 
 from accounts.forms import MyUserCreationForm, UserChangeForm, PasswordChangeForm
+from accounts.models import CustomUser
 
 
 class RegisterView(CreateView):
-    model = User
+    model = get_user_model()
     template_name = 'users/user_create.html'
     form_class = MyUserCreationForm
 
@@ -24,7 +25,7 @@ class RegisterView(CreateView):
         if not next_url:
             next_url = self.request.POST.get('next')
         if not next_url:
-            next_url = reverse('index')
+            next_url = reverse('news_client:index')
         return next_url
 
 
@@ -44,7 +45,7 @@ class UsersListView(PermissionRequiredMixin, ListView):
     permission_required = 'accounts.can_view_users'
 
     def get_queryset(self):
-        return User.objects.all()
+        return CustomUser.objects.all()
 
 
 class UserChangeView(UserPassesTestMixin, UpdateView):
@@ -79,3 +80,10 @@ class UserPasswordChangeView(UserPassesTestMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('accounts:detail', kwargs={'pk': self.object.pk})
+
+
+class UserDeleteView(LoginRequiredMixin, DeleteView):
+    template_name = 'users/user_delete.html'
+    model = get_user_model()
+    context_object_name = 'user'
+    success_url = reverse_lazy('accounts:list')

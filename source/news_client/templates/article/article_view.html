@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <h1 class="title">Article Detail</h1>
+
     {% if request.user.is_authenticated %}
         <a class="btn btn-outline-dark btn-block" href="{% url 'news_client:article_create' %}">Add new article...</a>
     {% endif %}

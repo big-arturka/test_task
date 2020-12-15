@@ -12,6 +12,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Surname</th>
                 <th scope="col">Username</th>
+                <th scope="col">Actions</th>
                 </tr>
             </thead>
             {% for user in users %}
@@ -21,6 +22,9 @@
                         <td><a class="link" href="{% url 'accounts:detail' user.pk %}">{{ user.first_name }}</a></td>
                         <td><a class="link" href="{% url 'accounts:detail' user.pk %}">{{ user.last_name }}</a></td>
                         <td><a class="link" href="{% url 'accounts:detail' user.pk %}">{{ user.username }}</a></td>
+                        <td><a class="link btn btn-outline-dark" href="{% url 'accounts:detail' user.pk %}">Detail</a>
+                         || <a class="link btn btn-outline-dark" href="{% url 'accounts:change' user.pk %}">Edit</a> ||
+                        <a class="link btn btn-outline-danger" href="{% url 'accounts:delete' user.pk %}">Delete</a></td>
                         </tr>
                     </tbody>
             {% endfor %}

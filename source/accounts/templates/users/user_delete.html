@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}User Delete{% endblock %}
+
+{% block content %}
+    <h2 class="title">User Delete</h2>
+    <div class="user-delete-container">
+        <h2 style="text-align: center">Are you sure you want to delete the user "{{ user.username }}"?</h2>
+        {% if user.first_name or user.last_name or user.email %}
+            <h3> User: </h3>
+            <h5>Name: {{ user.first_name }}</h5>
+            <h5>Surname: {{ user.last_name }}</h5>
+            <h5>Email: {{ user.email }}</h5>
+        {% endif %}
+        <form action="{% url "accounts:delete" user.pk %}" method="post">
+            {% csrf_token %}
+            <p><input class="btn btn-block btn-success" type="submit" value="Да"></p>
+            <p><a class="btn btn-block btn-outline-danger" href="{% url 'accounts:list' %}">Cancel</a></p>
+        </form>
+    </div>
+{% endblock %}

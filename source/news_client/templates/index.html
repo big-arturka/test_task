@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <h1 class="title">Articles</h1>
+
     <a class="btn btn-outline-dark btn-block" href="{% url 'news_client:article_create' %}">Add new article...</a>
     {% for article in articles %}
         <div class="card mt-4 mb-4">
