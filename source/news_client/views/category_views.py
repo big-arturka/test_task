@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 
@@ -16,26 +16,29 @@ class CategoryListView(LoginRequiredMixin, ListView):
         return Category.objects.all()
 
 
-class CategoryCreateView(LoginRequiredMixin, CreateView):
+class CategoryCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'category/category_create.html'
     form_class = CategoryForm
     model = Category
+    permission_required = 'news_client.add_category'
 
     def get_success_url(self):
         return reverse('news_client:category_list')
 
 
-class CategoryUpdateView(LoginRequiredMixin, UpdateView):
+class CategoryUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'category/category_update.html'
     form_class = CategoryForm
     model = Category
+    permission_required = 'news_client.change_category'
 
     def get_success_url(self):
         return reverse('news_client:category_list')
 
 
-class CategoryDeleteView(LoginRequiredMixin, DeleteView):
+class CategoryDeleteView(PermissionRequiredMixin, DeleteView):
     model = Category
+    permission_required = 'news_client.delete_category'
 
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)

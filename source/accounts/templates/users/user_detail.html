@@ -3,7 +3,7 @@
 {% block title %}User{% endblock %}
 
 {% block menu %}
-    {% if request.user == user_obj %}
+    {% if perms.account.change_account or request.user == user_obj %}
         <li class="nav-item active">
             <a class="nav-link" href="{% url 'accounts:change' user_obj.pk %}">Edit</a>
         </li>
@@ -15,9 +15,18 @@
 
 {% block content %}
     <h1>{{ user_obj.get_full_name|default:user_obj.username }}'s personal page</h1>
-    {% if user_obj.profile.avatar %}
-        <img class="avatar" src="{{ user_obj.profile.avatar.url }}" width="250" height="250" alt="user picture">
+    <h4>Username: {{ user_obj.username }}</h4>
+    {% if user_obj.first_name %}
+        <h5>Name: {{ user_obj.first_name }}</h5>
     {% endif %}
-    <p>Username: {{ user_obj.username }}</p>
+    {% if user_obj.last_name %}
+        <h5>Surname: {{ user_obj.last_name }}</h5>
+    {% endif %}
+    {% if user_obj.email %}
+        <h5>Email: {{ user_obj.email }}</h5>
+    {% endif %}
+
+    <p><a class="btn btn-block btn-primary" href="{% url 'accounts:list' %}">Back to users page</a></p>
+    <p><a class="btn btn-block btn-primary" href="{% url 'news_client:index' %}">Main page</a></p>
 
 {% endblock %}

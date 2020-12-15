@@ -14,19 +14,10 @@ class RegisterView(CreateView):
     model = get_user_model()
     template_name = 'users/user_create.html'
     form_class = MyUserCreationForm
-
-    def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
-        return redirect(self.get_success_url())
+    permission_required = 'news_client.add_user'
 
     def get_success_url(self):
-        next_url = self.request.GET.get('next')
-        if not next_url:
-            next_url = self.request.POST.get('next')
-        if not next_url:
-            next_url = reverse('news_client:index')
-        return next_url
+        return redirect('accounts:list')
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
@@ -37,38 +28,41 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     paginate_related_orphans = 0
 
 
-class UsersListView(PermissionRequiredMixin, ListView):
+class UsersListView(LoginRequiredMixin, ListView):
     template_name = 'users/users_view.html'
     context_object_name = 'users'
     paginate_by = 10
     paginate_orphans = 4
-    permission_required = 'accounts.can_view_users'
 
     def get_queryset(self):
         return CustomUser.objects.all()
 
 
-class UserChangeView(UserPassesTestMixin, UpdateView):
+class UserChangeView(PermissionRequiredMixin, UpdateView):
     model = get_user_model()
     form_class = UserChangeForm
     template_name = 'users/user_change.html'
     context_object_name = 'user_obj'
+    permission_required = 'news_client.change_user'
 
-    def test_func(self):
-        return self.request.user == self.get_object()
+    def has_permission(self):
+        user = self.get_object()
+        return super().has_permission() or user == self.request.user
 
     def get_success_url(self):
         return reverse('accounts:detail', kwargs={'pk': self.object.pk})
 
 
-class UserPasswordChangeView(UserPassesTestMixin, UpdateView):
+class UserPasswordChangeView(PermissionRequiredMixin, UpdateView):
     model = get_user_model()
     template_name = 'users/user_password_change.html'
     form_class = PasswordChangeForm
     context_object_name = 'user_obj'
+    permission_required = 'news_client.change_user'
 
-    def test_func(self):
-        return self.request.user == self.get_object()
+    def has_permission(self):
+        user = self.get_object()
+        return super().has_permission() or user == self.request.user
 
     def get_object(self, queryset=None):
         return self.request.user
@@ -82,8 +76,13 @@ class UserPasswordChangeView(UserPassesTestMixin, UpdateView):
         return reverse('accounts:detail', kwargs={'pk': self.object.pk})
 
 
-class UserDeleteView(LoginRequiredMixin, DeleteView):
+class UserDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'users/user_delete.html'
     model = get_user_model()
     context_object_name = 'user'
     success_url = reverse_lazy('accounts:list')
+    permission_required = 'news_client.delete_user'
+
+    def has_permission(self):
+        user = self.get_object()
+        return super().has_permission() or user == self.request.user

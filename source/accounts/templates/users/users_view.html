@@ -22,13 +22,25 @@
                         <td><a class="link" href="{% url 'accounts:detail' user.pk %}">{{ user.first_name }}</a></td>
                         <td><a class="link" href="{% url 'accounts:detail' user.pk %}">{{ user.last_name }}</a></td>
                         <td><a class="link" href="{% url 'accounts:detail' user.pk %}">{{ user.username }}</a></td>
-                        <td><a class="link btn btn-outline-dark" href="{% url 'accounts:detail' user.pk %}">Detail</a>
-                         || <a class="link btn btn-outline-dark" href="{% url 'accounts:change' user.pk %}">Edit</a> ||
-                        <a class="link btn btn-outline-danger" href="{% url 'accounts:delete' user.pk %}">Delete</a></td>
+                        <td>
+                            {% if request.user.is_authenticated %}
+                                <a class="link btn btn-outline-dark" href="{% url 'accounts:detail' user.pk %}">Detail</a>
+                            {% endif %}
+                            {% if perms.accounts.change_user %}
+                                || <a class="link btn btn-outline-dark" href="{% url 'accounts:change' user.pk %}">Edit</a> ||
+                            {% endif %}
+                            {% if perms.accounts.delete_user %}
+                                <a class="link btn btn-outline-danger" href="{% url 'accounts:delete' user.pk %}">Delete</a></td>
+                            {% endif %}
                         </tr>
                     </tbody>
             {% endfor %}
         </table>
+        <hr>
+        {% if perms.accounts.add_user %}
+            <a class="btn btn-outline-dark btn-block" href="{% url 'accounts:create' %}">Add new user...</a>
+        {% endif %}
+        <p><a class="btn btn-block btn-primary" href="{% url 'news_client:index' %}">Main page</a></p>
     </div>
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}

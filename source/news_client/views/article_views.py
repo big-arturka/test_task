@@ -1,6 +1,6 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import redirect
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 
 from news_client.forms import ArticleForm
@@ -23,10 +23,11 @@ class ArticleView(LoginRequiredMixin, DetailView):
     context_object_name = 'article'
 
 
-class ArticleCreateView(LoginRequiredMixin, CreateView):
+class ArticleCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'article/article_create.html'
     form_class = ArticleForm
     model = Article
+    permission_required = 'news_client.add_article'
 
     def form_valid(self, form):
         article = form.save(commit=False)
@@ -35,7 +36,7 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
         return redirect('news_client:article_view', pk=article.pk)
 
 
-class ArticleUpdateView(LoginRequiredMixin, UpdateView):
+class ArticleUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'article/article_update.html'
     form_class = ArticleForm
     model = Article
@@ -46,7 +47,8 @@ class ArticleUpdateView(LoginRequiredMixin, UpdateView):
         return redirect('news_client:article_view', pk=article.pk)
 
 
-class ArticleDeleteView(LoginRequiredMixin, DeleteView):
+class ArticleDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'article/article_delete.html'
     model = Article
     success_url = reverse_lazy('news_client:index')
+    permission_required = 'news_client.add_article'
