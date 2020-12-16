@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.shortcuts import redirect
+from django.shortcuts import redirect, HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 
@@ -51,4 +51,4 @@ class ArticleDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'article/article_delete.html'
     model = Article
     success_url = reverse_lazy('news_client:index')
-    permission_required = 'news_client.add_article'
+    permission_required = 'news_client.delete_article'

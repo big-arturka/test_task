@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 
 from news_client.forms import CategoryForm
@@ -38,10 +38,6 @@ class CategoryUpdateView(PermissionRequiredMixin, UpdateView):
 
 class CategoryDeleteView(PermissionRequiredMixin, DeleteView):
     model = Category
+    template_name = 'category/category_delete.html'
     permission_required = 'news_client.delete_category'
-
-    def get(self, request, *args, **kwargs):
-        return self.delete(request, *args, **kwargs)
-
-    def get_success_url(self):
-        return reverse('news_client:category_list')
+    success_url = reverse_lazy('news_client:category_list')
