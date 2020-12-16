@@ -129,3 +129,15 @@ body {
 .content-container {
     padding-bottom: 50px;
 }
+
+.nav-container {
+    display: inline-block;
+    position: relative;
+}
+
+.log-link {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+}

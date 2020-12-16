@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete{% endblock %}
+
+{% block content %}
+    <h1 class="title">Delete Category</h1>
+
+    <div class="create-delete-update">
+        <h1>Are you sure you want to delete the category "{{ category.title }}"?</h1>
+        {% if category.parent_id %}
+            <p>Parent category: {{ category.parent_id.title }}</p>
+        {% endif %}
+        <form action="{% url "news_client:category_delete" category.pk %}" method="post">
+            {% csrf_token %}
+            <p><input class="btn btn-block btn-danger" type="submit" value="Да"></p>
+            <p><a class="btn btn-block btn-success" href="{% url 'news_client:category_list' %}">Cancel</a></p>
+        </form>
+
+    </div>
+{% endblock %}
