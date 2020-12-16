@@ -10,14 +10,14 @@ from accounts.forms import MyUserCreationForm, UserChangeForm, PasswordChangeFor
 from accounts.models import CustomUser
 
 
-class RegisterView(CreateView):
+class RegisterView(PermissionRequiredMixin, CreateView):
     model = get_user_model()
     template_name = 'users/user_create.html'
     form_class = MyUserCreationForm
     permission_required = 'news_client.add_user'
 
     def get_success_url(self):
-        return redirect('accounts:list')
+        return reverse('accounts:list')
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
