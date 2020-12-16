@@ -1,0 +1,48 @@
+[
+{
+  "model": "news_client.category",
+  "pk": 7,
+  "fields": {
+    "title": "IT-Technology",
+    "parent_id": null
+  }
+},
+{
+  "model": "news_client.category",
+  "pk": 8,
+  "fields": {
+    "title": "Programming",
+    "parent_id": 7
+  }
+},
+{
+  "model": "news_client.category",
+  "pk": 9,
+  "fields": {
+    "title": "System administration",
+    "parent_id": 7
+  }
+},
+{
+  "model": "news_client.article",
+  "pk": 21,
+  "fields": {
+    "category_id": 8,
+    "user_id": 1,
+    "title": "What is a Programmer?",
+    "description": "Computer programming is the process of designing and building an executable computer program to accomplish a specific computing result or to perform a specific task. Programming involves tasks such as: analysis, generating algorithms, profiling algorithms' accuracy and resource consumption, and the implementation of algorithms in a chosen programming language (commonly referred to as coding).[1][2] The source code of a program is written in one or more languages that are intelligible to programmers, rather than machine code, which is directly executed by the central processing unit. The purpose of programming is to find a sequence of instructions that will automate the performance of a task (which can be as complex as an operating system) on a computer, often for solving a given problem. Proficient programming thus often requires expertise in several different subjects, including knowledge of the application domain, specialized algorithms, and formal logic.",
+    "image": "pictures/fon-2_dZ0VMwv.jpg"
+  }
+},
+{
+  "model": "news_client.article",
+  "pk": 22,
+  "fields": {
+    "category_id": 9,
+    "user_id": 1,
+    "title": "System administration",
+    "description": "System administration is a job done by IT experts for an organization. The job is to ensure that computer systems and all related services are working well. The duties in system administration are wide ranging and often vary depending on the type of computer systems being maintained, although most of them share some common tasks that may be executed in different ways.\r\n\r\nCommon tasks include installation of new hardware or software, creating and managing user accounts, maintaining computer systems such as servers and databases, and planning and properly responding to system outages and various other problems. Other responsibilities may include light programing or scripting to make the system workflows easier as well as training computer users and assistants.",
+    "image": "pictures/fon-3.jpg"
+  }
+}
+]
