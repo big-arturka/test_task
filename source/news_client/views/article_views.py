@@ -40,7 +40,7 @@ class ArticleUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'article/article_update.html'
     form_class = ArticleForm
     model = Article
-    permission_required = 'webapp.change_article'
+    permission_required = 'news_client.change_article'
 
     def form_valid(self, form):
         article = form.save()

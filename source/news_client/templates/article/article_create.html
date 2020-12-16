@@ -4,7 +4,9 @@
 
 {% block content %}
     <h1 class="title">Create Article</h1>
-
-    {% url "news_client:article_create" as action_url %}
-    {% include 'partial/form.html' with action_url=action_url form_method='post' %}
+    <div class="create-delete-update">
+        {% url "news_client:article_create" as action_url %}
+        {% include 'partial/form.html' with action_url=action_url form_method='post' %}
+        <a class="btn btn-block btn-danger mt-2" href="{% url 'news_client:index' %}">Cancel</a>
+    </div>
 {% endblock %}

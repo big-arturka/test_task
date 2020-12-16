@@ -5,5 +5,8 @@
 
 {% block content %}
     <h1 class="title">Registration</h1>
-    {% include 'partial/form.html' with form_method='post' button_text="Save" %}
+    <div class="create-delete-update">
+        {% include 'partial/form.html' with form_method='post' button_text="Save" %}
+        <p><a class="btn btn-block btn-outline-primary mt-3" href="{% url 'accounts:list' %}">Back to users...</a></p>
+    </div>
 {% endblock %}

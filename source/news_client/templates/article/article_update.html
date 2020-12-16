@@ -2,13 +2,12 @@
 
 {% block title %}Update{% endblock %}
 
-{% block menu %}
-    <li><a href="{% url 'webapp:article_view' article.pk %}">Cancel</a></li>
-{% endblock %}
-
 {% block content %}
     <h1 class="title">Update Article</h1>
+    <div class="create-delete-update">
+        {% url "news_client:article_update" pk=article.pk as action_url %}
+        {% include 'partial/form.html' with action_url=action_url form_method='post' button_text='Update' %}
 
-    {% url "news_client:article_update" pk=article.pk as action_url %}
-    {% include 'partial/form.html' with action_url=action_url form_method='post' button_text='Update' %}
+        <p><a class="btn btn-block btn-danger mt-2" href="{% url 'news_client:article_view' article.pk %}">Cancel</a></p>
+    </div>
 {% endblock %}

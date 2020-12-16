@@ -14,19 +14,21 @@
 {% endblock %}
 
 {% block content %}
-    <h1>{{ user_obj.get_full_name|default:user_obj.username }}'s personal page</h1>
-    <h4>Username: {{ user_obj.username }}</h4>
-    {% if user_obj.first_name %}
-        <h5>Name: {{ user_obj.first_name }}</h5>
-    {% endif %}
-    {% if user_obj.last_name %}
-        <h5>Surname: {{ user_obj.last_name }}</h5>
-    {% endif %}
-    {% if user_obj.email %}
-        <h5>Email: {{ user_obj.email }}</h5>
-    {% endif %}
+    <h1 class="title">{{ user_obj.get_full_name|default:user_obj.username }}'s personal page</h1>
+    <div class="create-delete-update">
+        <h4>Username: {{ user_obj.username }}</h4>
+        {% if user_obj.first_name %}
+            <h5>Name: {{ user_obj.first_name }}</h5>
+        {% endif %}
+        {% if user_obj.last_name %}
+            <h5>Surname: {{ user_obj.last_name }}</h5>
+        {% endif %}
+        {% if user_obj.email %}
+            <h5>Email: {{ user_obj.email }}</h5>
+        {% endif %}
 
-    <p><a class="btn btn-block btn-primary" href="{% url 'accounts:list' %}">Back to users page</a></p>
-    <p><a class="btn btn-block btn-primary" href="{% url 'news_client:index' %}">Main page</a></p>
+        <p><a class="btn btn-block btn-primary" href="{% url 'accounts:list' %}">Back to users page</a></p>
+        <p><a class="btn btn-block btn-outline-primary" href="{% url 'news_client:index' %}">Main page</a></p>
+    </div>
 
 {% endblock %}

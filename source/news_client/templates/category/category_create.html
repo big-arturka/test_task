@@ -4,7 +4,9 @@
 
 {% block content %}
     <h1 class="title">Create Category</h1>
-
-    {% url "news_client:category_create" as action_url %}
-    {% include 'partial/form.html' with action_url=action_url form_method='post' %}
+    <div class="create-delete-update">
+        {% url "news_client:category_create" as action_url %}
+        {% include 'partial/form.html' with action_url=action_url form_method='post' %}
+        <a class="btn btn-block btn-outline-primary mt-3" href="{% url 'news_client:category_list' %}">Back to categories...</a>
+    </div>
 {% endblock %}

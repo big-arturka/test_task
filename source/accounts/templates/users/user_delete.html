@@ -14,7 +14,7 @@
         {% endif %}
         <form action="{% url "accounts:delete" user.pk %}" method="post">
             {% csrf_token %}
-            <p><input class="btn btn-block btn-success" type="submit" value="Да"></p>
+            <p><input class="btn btn-block btn-primary mt-5" type="submit" value="Да"></p>
             <p><a class="btn btn-block btn-outline-danger" href="{% url 'accounts:list' %}">Cancel</a></p>
         </form>
     </div>

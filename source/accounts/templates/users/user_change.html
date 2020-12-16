@@ -9,7 +9,10 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Change personal data</h1>
-    {% url "accounts:change" pk=article.pk as action_url %}
-    {% include 'partial/form.html' with action_url=action_url form_method='post' button_text='Update' %}
+    <h1 class="title">Change personal data</h1>
+    <div class="create-delete-update">
+        {% url "accounts:change" pk=article.pk as action_url %}
+        {% include 'partial/form.html' with action_url=action_url form_method='post' button_text='Update' %}
+        <p><a class="btn btn-block btn-outline-primary mt-3" href="{% url 'accounts:list' %}">Back to users...</a></p>
+    </div>
 {% endblock %}

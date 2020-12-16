@@ -6,16 +6,22 @@
     <a class="btn btn-outline-dark btn-block" href="{% url 'news_client:article_create' %}">Add new article...</a>
     {% for article in articles %}
         <div class="card mt-4 mb-4">
-            {% if article.image %}
-                <img src="{{ article.image.url }}" class="card-img-top" width="300" alt="photo">
-            {% endif %}
             <div class="card-body">
-                <h5 class="card-title">Title: {{ article.title }}</h5>
+                <h5 class="card-title" style="text-decoration: underline">Title: {{ article.title }}</h5>
+                <hr>
+                <h6 class="card-title" style="text-decoration: underline">Description:</h6>
+                <p class="text">{{ article.description }}</p>
+                <hr>
                 <a class="author-link" href="{% url 'accounts:detail' article.user_id.pk %}">Author: {{ article.user_id }}</a>
+                <hr>
                 <div class="article-actions">
                     {% if request.user.is_authenticated %}
                         <a class="btn btn-outline-dark" href="{% url 'news_client:article_view' article.pk %}">More details...</a>
+                    {% endif %}
+                    {% if perms.news_client.change_article %}
                         <a class="btn btn-outline-dark" href="{% url 'news_client:article_update' article.pk %}">Edit...</a>
+                    {% endif %}
+                    {% if perms.news_client.delete_article %}
                         <a class="btn btn-outline-dark" href="{% url 'news_client:article_delete' article.pk %}">Delete...</a>
                     {% endif %}
                 </div>

@@ -1,3 +1,8 @@
+body {
+    background: #F5FFFA;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
 .error {
     font-weight: bold;
     color: red;
@@ -106,4 +111,21 @@
     box-sizing: border-box;
     padding: 50px;
     margin-top: 50px;
+}
+
+.article-detail {
+    margin-top: 30px;
+    padding-bottom: 60px;
+}
+
+.create-delete-update {
+    border: solid 1px black;
+    border-radius: 5px;
+    margin-bottom: 100px;
+    box-sizing: border-box;
+    padding: 50px;
+}
+
+.content-container {
+    padding-bottom: 50px;
 }
