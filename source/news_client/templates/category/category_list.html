@@ -5,7 +5,7 @@
 {% block content %}
     <h1 class="title">Category List</h1>
 
-    {% if request.user.is_authenticated %}
+    {% if perms.news_client.add_category %}
         <a class="btn btn-outline-dark btn-block" href="{% url 'news_client:category_create' %}">Add new category...</a>
     {% endif %}
     <a class="btn btn-outline-primary btn-block" href="{% url 'news_client:index' %}">Main page...</a>
@@ -13,14 +13,15 @@
         {% for category in categories %}
             <div class="card w-100 cat-card">
                 <div class="card-body">
+                    <h5 class="card-title">Category:</h5>
                     <h5 class="card-title category-block">{{ category.title }}</h5>
-                    <h5 class="card-text">
-                        {% if category.parent_id %}
-                            <div class="category-block">{{ category.parent_id.title }}</div>
-                        {% endif %}
-                    </h5>
-                    {% if request.user.is_authenticated %}
+                    {% if category.parent_id %}
+                        <span style="color: blue">>></span> <h5 class="card-title category-block">{{ category.parent_id.title }}</h5>
+                    {% endif %}
+                    {% if perms.news_client.change_category %}
                         <a class="btn btn-outline-dark" href="{% url 'news_client:category_update' category.pk %}">Edit...</a>
+                    {% endif %}
+                    {% if perms.news_client.delete_category %}
                         <a class="btn btn-outline-dark" href="{% url 'news_client:category_delete' category.pk %}">Delete...</a>
                     {% endif %}
                 </div>
