@@ -1,9 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from django.core.exceptions import ValidationError
-
-from accounts.models import CustomUser
 
 
 class MyUserCreationForm(UserCreationForm):
@@ -18,18 +15,18 @@ class UserChangeForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
         fields = ['first_name', 'last_name', 'email']
-        labels = {'first_name': 'Имя', 'last_name': 'Фамилия', 'email': 'Email'}
+        labels = {'first_name': 'Name', 'last_name': 'Surname', 'email': 'Email'}
 
 
 class SetPasswordForm(forms.ModelForm):
-    password = forms.CharField(label="Новый пароль", strip=False, widget=forms.PasswordInput)
-    password_confirm = forms.CharField(label="Подтвердите пароль", widget=forms.PasswordInput, strip=False)
+    password = forms.CharField(label="New password", strip=False, widget=forms.PasswordInput)
+    password_confirm = forms.CharField(label="Confirm the password", widget=forms.PasswordInput, strip=False)
 
     def clean_password_confirm(self):
         password = self.cleaned_data.get("password")
         password_confirm = self.cleaned_data.get("password_confirm")
         if password and password_confirm and password != password_confirm:
-            raise forms.ValidationError('Пароли не совпадают!')
+            raise forms.ValidationError('Passwords do not match!')
         return password_confirm
 
     def save(self, commit=True):
