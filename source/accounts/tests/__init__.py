@@ -1,1 +1,1 @@
-from .test_user_not_aurh_views import *
+from .test_user_not_auth_views import *

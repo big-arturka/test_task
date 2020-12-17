@@ -1,5 +1,4 @@
 from django.http import HttpResponseRedirect
-from django.template.response import TemplateResponse
 from django.test import TestCase
 from django.urls import reverse
 from accounts.models import CustomUser
@@ -8,8 +7,10 @@ from accounts.models import CustomUser
 class NotAuthRegisterTestCase(TestCase):
     def test_get_register_form(self):
         response = self.client.get(reverse('accounts:create'))
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(type(response), TemplateResponse)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(type(response), HttpResponseRedirect)
+        response_url = response.url.split('?')
+        self.assertEqual(response_url[0], reverse('accounts:login'))
 
 
 class NotAuthDetailViewTestCase(TestCase):
