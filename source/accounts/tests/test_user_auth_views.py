@@ -139,4 +139,4 @@ class AuthUserDeleteTestCase(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(type(response), HttpResponseRedirect)
         response_url = response.url.split('?')
-        self.assertEqual(response_url[0], reverse('news_client:index'))
+        self.assertEqual(response_url[0], reverse('accounts:list'))
