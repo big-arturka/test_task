@@ -29,7 +29,9 @@
             </div>
         {% endfor %}
     </div>
-    <a class="btn btn-primary btn-block" href="{% url 'news_client:index' %}">Main page...</a>
+    {% if categories %}
+        <a class="btn btn-primary btn-block" href="{% url 'news_client:index' %}">Main page...</a>
+    {% endif %}
 
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}
