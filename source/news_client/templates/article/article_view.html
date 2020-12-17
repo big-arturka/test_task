@@ -6,7 +6,7 @@
     {% if perms.news_client.add_article %}
         <a class="btn btn-outline-dark btn-block" href="{% url 'news_client:article_create' %}">Add new article...</a>
     {% endif %}
-        <a class="btn btn-block btn-outline-primary" href="{% url 'news_client:index' %}">Main page</a>
+        <a class="btn btn-block btn-primary" href="{% url 'news_client:index' %}">Main page</a>
     <div class="article-detail">
         <div class="card">
             {% if article.image %}
@@ -37,5 +37,5 @@
             </div>
         </div>
     </div>
-    <a class="btn btn-block btn-outline-primary" href="{% url 'news_client:index' %}">Main page</a>
+    <a class="btn btn-block btn-primary" href="{% url 'news_client:index' %}">Main page</a>
 {% endblock %}

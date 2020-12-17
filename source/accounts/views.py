@@ -23,8 +23,6 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     model = get_user_model()
     template_name = 'users/user_detail.html'
     context_object_name = 'user_obj'
-    paginate_related_by = 5
-    paginate_related_orphans = 0
 
 
 class UsersListView(LoginRequiredMixin, ListView):
@@ -77,7 +75,7 @@ class UserDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'users/user_delete.html'
     model = get_user_model()
     context_object_name = 'user'
-    success_url = reverse_lazy('news_client:index')
+    success_url = reverse_lazy('accounts:list')
     permission_required = 'news_client.delete_user'
 
     def has_permission(self):

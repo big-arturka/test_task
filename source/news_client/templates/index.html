@@ -9,7 +9,7 @@
     {% for article in articles %}
         <div class="card mt-4 mb-4">
             <div class="card-body">
-                <h5 class="card-title" style="text-decoration: underline">Title: {{ article.title }}</h5>
+                <h5 class="card-title" style="text-decoration: underline"><a class="art-link" href="{% url 'news_client:article_view' article.pk %}">Title: {{ article.title }}</a></h5>
                 <hr>
                 <h6 class="card-title" style="text-decoration: underline">Description:</h6>
                 <p class="text">{{ article.description }}</p>

@@ -141,3 +141,12 @@ body {
     top: 0;
     right: 0;
 }
+
+
+#input-btn-1, #input-btn-2, #input-btn-3 {
+    border: solid 1px green;
+}
+
+.art-link {
+    color: black;
+}

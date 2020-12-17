@@ -12,8 +12,8 @@
         {% endif %}
         <form action="{% url "news_client:category_delete" category.pk %}" method="post">
             {% csrf_token %}
-            <p><input class="btn btn-block btn-danger" type="submit" value="Да"></p>
-            <p><a class="btn btn-block btn-success" href="{% url 'news_client:category_list' %}">Cancel</a></p>
+            <p><input id="input-btn-3" class="btn btn-block btn-outline-success" type="submit" value="Да"></p>
+            <p><a class="btn btn-block btn-outline-danger" href="{% url 'news_client:category_list' %}">Cancel</a></p>
         </form>
 
     </div>

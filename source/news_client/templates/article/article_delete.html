@@ -12,8 +12,8 @@
         <p>{{ article.description }}</p>
         <form action="{% url "news_client:article_delete" article.pk %}" method="post">
             {% csrf_token %}
-            <p><input class="btn btn-block btn-danger" type="submit" value="Да"></p>
-            <p><a class="btn btn-block btn-success" href="{% url 'news_client:article_view' article.pk %}">Cancel</a></p>
+            <p><input id="input-btn-2" class="btn btn-block btn-outline-success" type="submit" value="Да"></p>
+            <p><a class="btn btn-block btn-outline-danger" href="{% url 'news_client:article_view' article.pk %}">Cancel</a></p>
         </form>
 
     </div>
