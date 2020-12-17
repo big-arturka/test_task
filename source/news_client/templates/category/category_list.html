@@ -23,7 +23,7 @@
                         <a class="btn btn-outline-dark" href="{% url 'news_client:category_update' category.pk %}">Edit...</a>
                     {% endif %}
                     {% if perms.news_client.delete_category %}
-                        <a class="btn btn-outline-dark" href="{% url 'news_client:category_delete' category.pk %}">Delete...</a>
+                        <a class="btn btn-outline-danger" href="{% url 'news_client:category_delete' category.pk %}">Delete...</a>
                     {% endif %}
                 </div>
             </div>

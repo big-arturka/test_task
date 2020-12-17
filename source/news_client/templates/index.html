@@ -24,7 +24,7 @@
                         <a class="btn btn-outline-dark" href="{% url 'news_client:article_update' article.pk %}">Edit...</a>
                     {% endif %}
                     {% if perms.news_client.delete_article %}
-                        <a class="btn btn-outline-dark" href="{% url 'news_client:article_delete' article.pk %}">Delete...</a>
+                        <a class="btn btn-outline-danger" href="{% url 'news_client:article_delete' article.pk %}">Delete...</a>
                     {% endif %}
                 </div>
             </div>
