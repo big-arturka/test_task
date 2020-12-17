@@ -99,13 +99,13 @@ class AuthPasswordChangeTestCase(TestCase):
         self.client.logout()
 
     def test_get_password_change(self):
-        response = self.client.get(reverse('accounts:password_change'))
+        response = self.client.get(reverse('accounts:password_change', kwargs={'pk': self.user.pk}))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(type(response), TemplateResponse)
 
     def test_post_password_change(self):
         data = {'password': 'admin1', 'password_confirm': 'admin1', 'old_password': 'admin'}
-        response = self.client.post(reverse('accounts:password_change'), data=data)
+        response = self.client.post(reverse('accounts:password_change', kwargs={'pk': self.user.pk}), data=data)
         self.assertEqual(response.status_code, 302)
         self.assertEqual(type(response), HttpResponseRedirect)
         response_url = response.url.split('?')
