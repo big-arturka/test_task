@@ -5,8 +5,9 @@
 {% block content %}
     <h1 class="title">Create Article</h1>
     {% if not categories %}
-        <div style="border: solid 1px red; border-radius: 5px" class="mt-5 mb-5">
-            <h1 style="color: red; text-align: center">Отсутствуют категории!<br> Категория является обязательной при создании статьи!!!</h1>
+        <div style="box-sizing: border-box; padding: 10px; color: red; border: solid 1px red; border-radius: 5px" class="mt-5 mb-5">
+            <h2 style="text-align: center">Categories are missing! <br>Category is required when creating an article !!!</h2>
+            <a class="btn btn-outline-danger btn-block" href="{% url 'news_client:category_create' %}">Add new category...</a>
         </div>
     {% endif %}
     <div class="create-delete-update">

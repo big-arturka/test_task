@@ -6,6 +6,12 @@
         <a class="btn btn-outline-dark btn-block" href="{% url 'news_client:article_create' %}">Add new article...</a>
     {% endif %}
 
+    {% if articles|length == 0 %}
+        <div style="text-align: center; margin: 20px">
+            <h5 style="font-weight: bold">Nothing found...</h5>
+        </div>
+    {% endif %}
+
     {% for article in articles %}
         <div class="card mt-4 mb-4">
             <div class="card-body">

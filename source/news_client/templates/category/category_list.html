@@ -9,6 +9,11 @@
         <a class="btn btn-outline-dark btn-block" href="{% url 'news_client:category_create' %}">Add new category...</a>
     {% endif %}
     <a class="btn btn-primary btn-block" href="{% url 'news_client:index' %}">Main page...</a>
+    {% if categories|length == 0 %}
+        <div style="text-align: center; margin: 20px">
+            <h5 style="font-weight: bold">Nothing found...</h5>
+        </div>
+    {% endif %}
     <div class="category-list-container">
         {% for category in categories %}
             <div class="card w-100 cat-card">
