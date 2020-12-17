@@ -2,8 +2,10 @@
 
 {% block content %}
     <h1 class="title">Articles</h1>
+    {% if perms.news_client.add_article %}
+        <a class="btn btn-outline-dark btn-block" href="{% url 'news_client:article_create' %}">Add new article...</a>
+    {% endif %}
 
-    <a class="btn btn-outline-dark btn-block" href="{% url 'news_client:article_create' %}">Add new article...</a>
     {% for article in articles %}
         <div class="card mt-4 mb-4">
             <div class="card-body">

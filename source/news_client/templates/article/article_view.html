@@ -3,7 +3,7 @@
 {% block content %}
     <h1 class="title">Article Detail</h1>
 
-    {% if request.user.is_authenticated %}
+    {% if perms.news_client.add_article %}
         <a class="btn btn-outline-dark btn-block" href="{% url 'news_client:article_create' %}">Add new article...</a>
     {% endif %}
         <a class="btn btn-block btn-outline-primary" href="{% url 'news_client:index' %}">Main page</a>
@@ -37,4 +37,5 @@
             </div>
         </div>
     </div>
+    <a class="btn btn-block btn-outline-primary" href="{% url 'news_client:index' %}">Main page</a>
 {% endblock %}
