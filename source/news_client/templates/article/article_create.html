@@ -4,6 +4,11 @@
 
 {% block content %}
     <h1 class="title">Create Article</h1>
+    {% if not categories %}
+        <div style="border: solid 1px red; border-radius: 5px" class="mt-5 mb-5">
+            <h1 style="color: red; text-align: center">Отсутствуют категории!<br> Категория является обязательной при создании статьи!!!</h1>
+        </div>
+    {% endif %}
     <div class="create-delete-update">
         {% url "news_client:article_create" as action_url %}
         {% include 'partial/form.html' with action_url=action_url form_method='post' %}

@@ -29,7 +29,7 @@
             </div>
         {% endfor %}
     </div>
-    {% if categories %}
+    {% if categories|length > 3 %}
         <a class="btn btn-primary btn-block" href="{% url 'news_client:index' %}">Main page...</a>
     {% endif %}
 

@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 
 from news_client.forms import ArticleForm
-from news_client.models import Article
+from news_client.models import Article, Category
 
 
 class IndexView(LoginRequiredMixin, ListView):
@@ -28,6 +28,12 @@ class ArticleCreateView(PermissionRequiredMixin, CreateView):
     form_class = ArticleForm
     model = Article
     permission_required = 'news_client.add_article'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        categories = Category.objects.all()
+        context['categories'] = categories
+        return context
 
     def form_valid(self, form):
         article = form.save(commit=False)
