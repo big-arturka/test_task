@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model, update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView
 
@@ -60,7 +61,8 @@ class UserPasswordChangeView(UserPassesTestMixin, UpdateView):
         return self.request.user == self.get_object()
 
     def get_object(self, queryset=None):
-        return self.request.user
+        user = get_object_or_404(get_user_model(), pk=self.kwargs['pk'])
+        return user
 
     def form_valid(self, form):
         user = form.save()

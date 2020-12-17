@@ -10,7 +10,7 @@
     {% endif %}
     {% if request.user == user_obj %}
         <li class="nav-item active">
-            <a class="nav-link" href="{% url 'accounts:password_change' %}">Change password</a>
+            <a class="nav-link" href="{% url 'accounts:password_change' user_obj.pk%}">Change password</a>
         </li>
     {% endif %}
 {% endblock %}
@@ -30,14 +30,14 @@
         {% endif %}
 
         {% if perms.account.change_account or request.user == user_obj %}
-            <a class="link btn btn-outline-dark mt-2" href="{% url 'accounts:change' user.pk %}">Change personal data</a>
+            <a class="link btn btn-outline-dark mt-2" href="{% url 'accounts:change' user_obj.pk %}">Change personal data</a>
         {% endif %}
-        {% if perms.account.change_account or request.user == user_obj %}
-            <a class="link btn btn-outline-dark mt-2" href="{% url 'accounts:password_change' %}">Change password</a>
+        {% if request.user == user_obj %}
+            <a class="link btn btn-outline-dark mt-2" href="{% url 'accounts:password_change' user_obj.pk %}">Change password</a>
         {% endif %}
         <hr>
         {% if perms.account.delete_account or request.user == user_obj %}
-            <a class="link btn btn-outline-danger mt-2" href="{% url 'accounts:delete' user.pk %}">Delete account</a>
+            <a class="link btn btn-outline-danger mt-2" href="{% url 'accounts:delete' user_obj.pk %}">Delete account</a>
         {% endif %}
 
         <p><a class="btn btn-block btn-primary mt-5" href="{% url 'accounts:list' %}">Back to users page</a></p>
