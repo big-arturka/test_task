@@ -6,11 +6,20 @@ from rest_framework.response import Response
 from news_client.models import Article, Category
 
 
-EXAMPLE_DATA = [{"id": 1,
-                   "category_id": 1,
-                   "title": "test",
-                   "description": "test",
-                   "user_id": 1}]
+EXAMPLE_DATA = [{
+                    "id": 1,
+                    "title": "test",
+                    "description": "test",
+                    "category_id": 1,
+                    "category_name": {
+                        "title": "category",
+                        "parent_id": None
+                    },
+                    "user_id": 1,
+                    "author_name": {
+                        "username": "admin"
+                    }
+                }]
 
 
 class ApiGetArticleTestCase(TestCase):
